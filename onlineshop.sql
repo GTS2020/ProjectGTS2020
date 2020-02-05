@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Feb 2020 pada 17.58
--- Versi server: 10.1.37-MariaDB
--- Versi PHP: 5.6.40
+-- Waktu pembuatan: 05 Feb 2020 pada 20.36
+-- Versi server: 10.1.35-MariaDB
+-- Versi PHP: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -64,7 +64,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_barang`, `qty`, `deskri
 
 CREATE TABLE `detail` (
   `id_barang` int(11) NOT NULL,
-  `no_transaksi` int(11) NOT NULL,
+  `no_transaksi` varchar(11) NOT NULL,
   `nama_barang` varchar(128) NOT NULL,
   `harga_barang` int(15) NOT NULL,
   `qty` int(11) NOT NULL,
@@ -83,6 +83,20 @@ CREATE TABLE `keranjang` (
   `qty` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `keranjang`
+--
+
+INSERT INTO `keranjang` (`no_keranjang`, `id_barang`, `qty`, `id_user`) VALUES
+(1, 3, 1, 0),
+(2, 3, 30, 0),
+(3, 3, 12, 0),
+(4, 3, 12, 1),
+(5, 3, 1, 1),
+(6, 1, 1, 1),
+(7, 2, 1, 1),
+(8, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -112,8 +126,8 @@ INSERT INTO `pengguna` (`id_user`, `email`, `password`, `username`, `telepon`) V
 --
 
 CREATE TABLE `pesanan` (
-  `no_transaksi` int(11) NOT NULL,
-  `nama_barang` varchar(128) NOT NULL,
+  `no_transaksi` varchar(11) NOT NULL,
+  `nama_pembeli` varchar(128) NOT NULL,
   `total_harga` int(20) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -160,19 +174,13 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT untuk tabel `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `no_keranjang` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `no_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengguna`
 --
 ALTER TABLE `pengguna`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT untuk tabel `pesanan`
---
-ALTER TABLE `pesanan`
-  MODIFY `no_transaksi` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
