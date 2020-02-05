@@ -43,8 +43,12 @@ function barang()
 function getBarang()
 {
     global $db;
+    if(isset($_SESSION['id_user'])){
     $id_user = $_SESSION['id_user'];
-    $sql = "SELECT * from keranjang where id_user = $id_user";
+    }else{
+        $id_user = "";
+    }
+    $sql = "SELECT * from keranjang where id_user = '$id_user'";
     $stmt = $db->prepare($sql);
     $stmt->execute();
     return $stmt;
