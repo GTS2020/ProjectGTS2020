@@ -83,13 +83,16 @@ function search()
 function checkout()
 {
     global $db;
+    if(isset($_SESSION['id_user'])){
     $id_user = $_SESSION['id_user'];
-    $sql = "select * from keranjang where id_user = $id_user";
+    $nama_pembeli = $_SESSION['username'];
+    }else{
+        $id_user = "";
+        $nama_pembeli = "";
+    }
+    $sql = "select * from keranjang where id_user = '$id_user'";
     $query = $db->query($sql);
     $hasil = $query->fetch(PDO::FETCH_ASSOC);
-
-    $nama_pembeli = $_SESSION['username'];
-    $id_user = $_SESSION['id_user'];
 
     $sql = "SELECT no_transaksi from pesanan";
     $result = $db->query($sql);
