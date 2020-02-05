@@ -55,13 +55,17 @@ if (isset($_POST['cari'])) {
       </li> -->
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item pt-1 pr-2" id="ex3">
-          <?php
+        <?php
+        if (isset($_SESSION['username'])) {
           $id_user = $_SESSION['id_user'];
           $sql = "select count(id_user) as keranjang from keranjang where id_user = $id_user";
           $stmt = $db->query($sql);
           $hasil = $stmt->fetch(PDO::FETCH_ASSOC);
-          ?>
+        } else {
+          $hasil['keranjang'] = 3;
+        }
+        ?>
+        <li class="nav-item pt-1 pr-2" id="ex3">
           <span class="p1 fa-stack" data-count="<?= $hasil['keranjang'] ?>">
             <a class="nav-link" href="keranjang.php">
               <i class="fas fa-shopping-cart"></i>
