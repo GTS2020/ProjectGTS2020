@@ -240,7 +240,7 @@ require_once 'application/function.php';
         var modal = $(this)
         modal.find('.modal-title').text('New message to ' + recipient)
         modal.find('.modal-body input').val(recipient)
-        })
+        });
     </script>
 
 </body>
