@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Feb 2020 pada 20.36
+-- Waktu pembuatan: 05 Feb 2020 pada 21.15
 -- Versi server: 10.1.35-MariaDB
 -- Versi PHP: 7.2.9
 
@@ -89,9 +89,6 @@ CREATE TABLE `keranjang` (
 --
 
 INSERT INTO `keranjang` (`no_keranjang`, `id_barang`, `qty`, `id_user`) VALUES
-(1, 3, 1, 0),
-(2, 3, 30, 0),
-(3, 3, 12, 0),
 (4, 3, 12, 1),
 (5, 3, 1, 1),
 (6, 1, 1, 1),
@@ -132,6 +129,18 @@ CREATE TABLE `pesanan` (
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `useradmin`
+--
+
+CREATE TABLE `useradmin` (
+  `id` int(11) NOT NULL,
+  `username` varchar(32) NOT NULL,
+  `password` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
@@ -161,6 +170,12 @@ ALTER TABLE `pesanan`
   ADD PRIMARY KEY (`no_transaksi`);
 
 --
+-- Indeks untuk tabel `useradmin`
+--
+ALTER TABLE `useradmin`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
@@ -181,6 +196,12 @@ ALTER TABLE `keranjang`
 --
 ALTER TABLE `pengguna`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `useradmin`
+--
+ALTER TABLE `useradmin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
