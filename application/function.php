@@ -70,13 +70,17 @@ function addBarang()
 function search()
 {
     global $db;
+    $brg = $_GET['cari'];
+    $sql = "SELECT * FROM barang WHERE nama_barang like '%$brg%'";
+    $stmt = $db->query($sql);
+    return $stmt;
 }
 
 function checkout()
 {
     global $db;
     $id_user = $_SESSION['id_user'];
-    $sql = "select * from keranjang id_user = $id_user";
+    $sql = "select * from keranjang where id_user = $id_user";
     $query = $db->query($sql);
     $hasil = $query->fetch(PDO::FETCH_ASSOC);
 
@@ -97,7 +101,30 @@ function checkout()
             $no_tr++;
             $final = $no_tr;
         }
-    }
+    };
 
     $sql = "insert into pesanan values ('','$nama_pembeli','','')";
+}
+
+function loginadmin()
+{
+    global $db;
+    $user = $_POST['user'];
+    $pass = $_POST['pass'];
+    $sql = "select * from useradmin where username='$user' AND password='$pass'";
+    $stmt = $db->query($sql);
+    if ($stmt->fetch(PDO::FETCH_ASSOC)) {
+        $_SESSION['admin'] = $user;
+        echo "<script> document.location.href='dashboard.php';</script>";
+    }
+    return $stmt->rowCount();
+}
+
+
+function daftPengguna()
+{
+    global $db;
+    $sql = "select * from pengguna";
+    $stmt = $db->query($sql);
+    return $stmt;
 }

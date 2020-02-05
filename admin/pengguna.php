@@ -1,3 +1,14 @@
+<?php
+session_start();
+require '../application/config.php';
+require '../application/function.php';
+
+if(!isset($_SESSION['admin'])){
+    header("Location: index.php");
+}
+
+?>
+
 <html>
     <head>
     <title>Online Shop</title>
@@ -91,6 +102,9 @@
         <body>
         <?php
             require 'navbar.php';
+            $pengguna = daftPengguna();
+            $no = 1;
+            while($row = $pengguna->fetch(PDO::FETCH_ASSOC)){
         ?>
 
 <div class="container mt-5">
@@ -106,16 +120,20 @@
   </thead>
   <tbody>
   <tr>  
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><a href='#'><i class='fas fa-edit' style='color: green;'></i>
+        <td><?php echo $no++; ?></td>
+        <td><?php echo $row['username']; ?></td>
+        <td><?php echo $row['email']; ?></td>
+        <td><?php echo $row['telepon']; ?></td>
+        <td><?php echo $no ?><a href='edit.php?pengguna='><i class='fas fa-edit' style='color: green;'></i>
                 </a>&nbsp<a href='#'><i class='far fa-times-circle' style='color: red;'></i>
                 </a></td>
   </tr>
   </tbody>
 </table>
+
+<?php
+}
+?>
 
  <!-- Javascript -->
  <script type="text/javascript" src="../mdbootstrap/js/jquery.min.js"></script>

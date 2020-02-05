@@ -1,7 +1,7 @@
 <?php
 session_start();
-require 'application/config.php';
-require 'application/function.php';
+require_once 'application/config.php';
+require_once 'application/function.php';
 
 ?>
 
@@ -146,13 +146,13 @@ require 'application/function.php';
                         <span>Jumlah</span>
                     </div>
                     <div class="col">
-                        <span>Stok Tersisa <?= $row['qty']; ?></span>
+                        <span>Stok Tersisa <? echo $row['qty']; ?></span>
                         <div class="clearfix"></div>
                         <div class="w-responsive p-0 mt-2" style="width:25%;">
                             <div class="stok">
-                                <form method="POST" style="display:flex;" action="">
-                                    <button type="button" class="p-1 blue darken-3 qty" id="min"><i class="fas fa-minus" style="color:white;"></i></button>
-                                    <input class="mr-1 ml-1" type="text" style="border: 0px; outline:none; flex: 1; font-size: 15px; text-align:center;" name="qty" size="5" maxlength="7" value="1">
+                                <form method="POST" style="display:flex;">
+                                    <button type="submit" class="p-1 blue darken-3 qty" id="min"><i class="fas fa-minus" style="color:white;"></i></button>
+                                    <input class="mr-1 ml-1" id="stok" type="text" style="border: 0px; outline:none; flex: 1; font-size: 15px; text-align:center;" name="qty" size="5" maxlength="7" value="1">
                                     <button type="button" class="p-1 blue darken-3 qty" id="plus"><i class="fas fa-plus" style="color:white;"></i></button>
                             </div>
                         </div>
@@ -165,7 +165,7 @@ require 'application/function.php';
                         <span>Deskripsi</span>
                     </div>
                     <div class="col">
-                        <span><?= $row['deskripsi']; ?></span>
+                        <span><? echo $row['deskripsi']; ?></span>
                     </div>
                 </div>
 

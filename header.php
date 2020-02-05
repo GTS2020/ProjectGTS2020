@@ -1,3 +1,10 @@
+<?php
+if (isset($_POST['cari'])) {
+  $value = $_POST['barang'];
+  header("Location: http://localhost/ProjectGts/search.php?cari=$value");
+}
+?>
+
 <!--Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark light-blue darken-3 pr-4 sticky-top">
   <div class="container-fluid">
@@ -8,15 +15,10 @@
 
     <div class="form-control p-1 ml-4" style="width:35%">
 
-      <form style="display: flex;">
+      <form style="display: flex;" method="post">
         <!-- Kat -->
-        <select>
-          <option value="all">Kategori</option>
-          <option value="all">Game</option>
-          <option value="all">Buku</option>
-        </select>
-        <input class="w-responsive pl-1" type="text" style="border: 0px; outline:none; flex: 1; font-size: 15px" maxlength="50" placeholder="Search">
-        <button type="submit" class="input-group-text light-blue darken-3 float-right" id="basic-addon11" style="border: 0px;"><i class="fas fa-search" style="color:white;"></i></button>
+        <input class="w-responsive pl-1" type="text" name="barang" style="border: 0px; outline:none; flex: 1; font-size: 15px" maxlength="50" placeholder="Search">
+        <button type="submit" class="input-group-text light-blue darken-3 float-right" name="cari" id="basic-addon11" style="border: 0px;"><i class="fas fa-search" style="color:white;"></i></button>
       </form>
       <!-- Default form subscription -->
 
@@ -56,11 +58,11 @@
         <li class="nav-item pt-1 pr-2" id="ex3">
           <?php
           $id_user = $_SESSION['id_user'];
-          $sql = "select count(id_barang) as hasil from keranjang where id_user = $id_user";
-          $hasil = $db->query($sql);
-          $row = $hasil->fetch(PDO::FETCH_ASSOC);
+          $sql = "select count(id_user) as keranjang from keranjang where id_user = $id_user";
+          $stmt = $db->query($sql);
+          $hasil = $stmt->fetch(PDO::FETCH_ASSOC);
           ?>
-          <span class="p1 fa-stack" data-count="<?= $row['hasil'] ?>">
+          <span class="p1 fa-stack" data-count="<?= $hasil['keranjang'] ?>">
             <a class="nav-link" href="keranjang.php">
               <i class="fas fa-shopping-cart"></i>
             </a>

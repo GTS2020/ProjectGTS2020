@@ -1,6 +1,8 @@
 <?php
+session_start();
 require '../application/config.php';
 require '../application/function.php';
+
 
 if (isset($_POST["Simpan"])) {
   $ekstensi_diperbolehkan    = array('png', 'jpg', 'jpeg');
@@ -181,7 +183,7 @@ while($data = $barang->fetch(PDO::FETCH_ASSOC)){
         <td><? echo $data['deskripsi']; ?></td>
         <td><? echo $data['harga_barang']; ?></td>
         <td><a href='edit.php?barang=<? echo $data['nama_barang']; ?>'><i class='fas fa-edit' style='color: green;'></i>
-                </a>&nbsp<a href='hapus?barang.php=<? echo $data['nama_barang']; ?>'><i class='far fa-times-circle' style='color: red;'></i>
+                </a>&nbsp<a href='hapus.php?barang=<? echo $data['nama_barang']; ?>'><i class='far fa-times-circle' style='color: red;'></i>
                 </a></td>
   </tr>
   </tbody>
