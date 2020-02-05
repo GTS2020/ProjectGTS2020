@@ -106,8 +106,8 @@ require_once 'application/function.php';
     $sql = "select * from barang where nama_barang = '$id' ";
     $barang = $db->query($sql);
     $row = $barang->fetch(PDO::FETCH_ASSOC);
+    if(isset($_SESSION['id_user'])){
     $id_user = $_SESSION['id_user'];
-
     if (isset($_POST['cart'])) {
 
         $id = $row['id_barang'];
@@ -117,6 +117,7 @@ require_once 'application/function.php';
         $sql = "insert into keranjang values ('','$id','$qty','$id_user')";
         $db->query($sql);
     }
+}
 
     ?>
 
