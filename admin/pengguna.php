@@ -124,8 +124,8 @@ if(!isset($_SESSION['admin'])){
         <td><?php echo $row['username']; ?></td>
         <td><?php echo $row['email']; ?></td>
         <td><?php echo $row['telepon']; ?></td>
-        <td><?php echo $no ?><a href='edit.php?pengguna='><i class='fas fa-edit' style='color: green;'></i>
-                </a>&nbsp<a href='#'><i class='far fa-times-circle' style='color: red;'></i>
+        <td><?php echo $no ?><a href='edit.php?pengguna=<?php echo $row['username']; ?>'><i class='fas fa-edit' style='color: green;'></i>
+                </a>&nbsp<a href='hapus.php?pengguna=<?php echo $row['username']; ?>'><i class='far fa-times-circle' style='color: red;'></i>
                 </a></td>
   </tr>
   </tbody>

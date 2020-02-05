@@ -80,6 +80,12 @@ function daftPengguna(){
     return $stmt;
 }
 
-
+function edPengguna(){
+    global $db;
+    $peng = $_GET['pengguna'];
+    $sql = "select * from pengguna where pengguna='$peng'";
+    $stmt = $db->query($sql);
+    return $stmt;
+}
 
 ?>
