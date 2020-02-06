@@ -138,7 +138,7 @@ require_once 'application/function.php';
             <div class="row mt-3">
 
                 <div class="col-sm-2">
-                    <img class="card-img-top" src="gambar/x.jpg" alt="Card image cap" />
+                    <img class="card-img-top" src="gambar/<?= $result['gambar'] ?>" alt="Card image cap" />
                 </div>
 
                 <div class="col-sm-4">

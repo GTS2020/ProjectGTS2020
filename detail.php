@@ -106,18 +106,18 @@ require_once 'application/function.php';
     $sql = "select * from barang where nama_barang = '$id' ";
     $barang = $db->query($sql);
     $row = $barang->fetch(PDO::FETCH_ASSOC);
-    if(isset($_SESSION['id_user'])){
-    $id_user = $_SESSION['id_user'];
-    if (isset($_POST['cart'])) {
+    if (isset($_SESSION['id_user'])) {
+        $id_user = $_SESSION['id_user'];
+        if (isset($_POST['cart'])) {
 
-        $id = $row['id_barang'];
-        $nm_bar = $row['nama_barang'];
-        $hrg = $row['harga_barang'];
-        $qty = $_POST['qty'];
-        $sql = "insert into keranjang values ('','$id','$qty','$id_user')";
-        $db->query($sql);
+            $id = $row['id_barang'];
+            $nm_bar = $row['nama_barang'];
+            $hrg = $row['harga_barang'];
+            $qty = $_POST['qty'];
+            $sql = "insert into keranjang values ('','$id','$qty','$id_user')";
+            $db->query($sql);
+        }
     }
-}
 
     ?>
 
@@ -147,14 +147,12 @@ require_once 'application/function.php';
                         <span>Jumlah</span>
                     </div>
                     <div class="col">
-                        <span>Stok Tersisa <? echo $row['qty']; ?></span>
+                        <span>Stok Tersisa <?= $row['qty']; ?></span>
                         <div class="clearfix"></div>
                         <div class="w-responsive p-0 mt-2" style="width:25%;">
                             <div class="stok">
                                 <form method="POST" style="display:flex;">
-                                    <button type="submit" class="p-1 blue darken-3 qty" id="min"><i class="fas fa-minus" style="color:white;"></i></button>
-                                    <input class="mr-1 ml-1" id="stok" type="text" style="border: 0px; outline:none; flex: 1; font-size: 15px; text-align:center;" name="qty" size="5" maxlength="7" value="1">
-                                    <button type="button" class="p-1 blue darken-3 qty" id="plus"><i class="fas fa-plus" style="color:white;"></i></button>
+                                    <input class="mr-1 ml-1 form-control" id="stok" type="text" style=" flex: 1; font-size: 15px; text-align:center;" name="qty" size="5" maxlength="7" value="1">
                             </div>
                         </div>
                     </div>

@@ -43,9 +43,9 @@ function barang()
 function getBarang()
 {
     global $db;
-    if(isset($_SESSION['id_user'])){
-    $id_user = $_SESSION['id_user'];
-    }else{
+    if (isset($_SESSION['id_user'])) {
+        $id_user = $_SESSION['id_user'];
+    } else {
         $id_user = "";
     }
     $sql = "SELECT * from keranjang where id_user = '$id_user'";
@@ -83,10 +83,10 @@ function search()
 function checkout()
 {
     global $db;
-    if(isset($_SESSION['id_user'])){
-    $id_user = $_SESSION['id_user'];
-    $nama_pembeli = $_SESSION['username'];
-    }else{
+    if (isset($_SESSION['id_user'])) {
+        $id_user = $_SESSION['id_user'];
+        $nama_pembeli = $_SESSION['username'];
+    } else {
         $id_user = "";
         $nama_pembeli = "";
     }
@@ -117,7 +117,7 @@ function loginadmin()
 {
     global $db;
     $user = $_POST['user'];
-    $pass = $_POST['pass'];
+    $pass = MD5($_POST['pass']);
     $sql = "select * from useradmin where username='$user' AND password='$pass'";
     $stmt = $db->query($sql);
     if ($stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -136,12 +136,11 @@ function daftPengguna()
     return $stmt;
 }
 
-function edPengguna(){
+function edPengguna()
+{
     global $db;
     $peng = $_GET['pengguna'];
     $sql = "select * from pengguna where pengguna='$peng'";
     $stmt = $db->query($sql);
     return $stmt;
 }
-
-?>
