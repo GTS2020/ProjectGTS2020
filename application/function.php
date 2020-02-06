@@ -82,6 +82,7 @@ function search()
 function checkout()
 {
     global $db;
+
     // if (isset($_SESSION['id_user'])) {
     $id_user = $_SESSION['id_user'];
     $nama_pembeli = $_SESSION['username'];
@@ -108,37 +109,46 @@ function checkout()
 
     $harga_total = [];
 
-    $sql = "select * from keranjang where id_user = '$id_user'";
-    $query = ($db->query($sql));
+    $barang = "select * from keranjang where id_user=$id_user";
+    $hasil = $db->query($barang);
+    $row = $hasil->fetch(PDO::FETCH_ASSOC);
+    $test = $hasil->rowCount();
+    echo $test;
     // // total harga
-    while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+    // while ($row = $hasil->fetch(PDO::FETCH_ASSOC)) {
+    //     $id_barang = $row['id_barang'];
+    //     $sql = "select * from barang where id_barang = $id_barang ";
+    //     $hasil = $db->query($sql);
+    //     $result = $hasil->fetch(PDO::FETCH_ASSOC);
+    //     $total = $row['qty'] * $result['harga_barang'];
+    //     array_push($harga_total, $total);
+    // }
+
+    // $totalhrg = array_sum($harga_total);
+
+    // $sql3 = "insert into pesanan values ('$final','$nama_pembeli','$totalhrg','$id_user')";
+    // $db->query($sql3);
+
+    while ($row = $hasil->fetch(PDO::FETCH_ASSOC)) {
         $id_barang = $row['id_barang'];
-        $sql = "select * from barang where id_barang = $id_barang ";
-        $hasil = $db->query($sql);
-        $result = $hasil->fetch(PDO::FETCH_ASSOC);
-        $total = $row['qty'] * $result['harga_barang'];
-        array_push($harga_total, $total);
-    }
+        $qty = $row['qty'];
 
-    $totalhrg = array_sum($harga_total);
-
-    $sql3 = "insert into pesanan values ('$final','$nama_pembeli','$totalhrg','$id_user')";
-    $db->query($sql3);
-
-    foreach ($query as $rows) :
-        $id_barang = $rows['id_barang'];
-        $qty = $rows['qty'];
-
-        $sql1 = "INSERT into detail (id_barang, no_transaksi, nama_barang, harga_barang, qty, id_user) select b.id_barang, '$final', nama_barang, harga_barang, '$qty', '$id_user' from keranjang k, barang b, pesanan where b.id_barang=$id_barang and no_transaksi = '$final'";
+        $sql1 = "INSERT into detail (id_barang, no_transaksi, nama_barang, harga_barang, qty, id_user) 
+        select b.id_barang, '$final', nama_barang, harga_barang, '$qty', '$id_user' 
+        from keranjang k, barang b, pesanan 
+        where b.id_barang=$id_barang and no_transaksi = '$final'";
         $db->query($sql1);
+
         echo $sql1;
+
+        //
         $stok = $db->query("select * from barang where id_barang = '$id_barang'");
         $fetch_stok = $stok->fetch(PDO::FETCH_ASSOC);
         $stok_lama = $fetch_stok['qty'];
         $stok_baru = $stok_lama - $qty;
         $sql2 = "UPDATE barang set qty='$stok_baru' where id_barang='$id_barang'";
         $db->query($sql2);
-    endforeach;
+    }
 
     /*!
     $hapus =
