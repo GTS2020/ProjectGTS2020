@@ -3,6 +3,9 @@ session_start();
 require '../application/config.php';
 require '../application/function.php';
 
+if (!isset($_SESSION['admin'])) {
+  header("Location: index.php");
+}
 
 if (isset($_POST["Simpan"])) {
   $ekstensi_diperbolehkan    = array('png', 'jpg', 'jpeg');
@@ -12,9 +15,6 @@ if (isset($_POST["Simpan"])) {
   $ukuran    = $_FILES['gambar']['size'];
   $file_tmp = $_FILES['gambar']['tmp_name'];
 
-
-  echo var_dump(in_array($ekstensi, $ekstensi_diperbolehkan));
-
   if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
         if ($ukuran < 1044070) {
         move_uploaded_file($file_tmp, '../gambar/' . $nama);
@@ -23,14 +23,12 @@ if (isset($_POST["Simpan"])) {
         echo "
         <script>
             alert('Gambar terlalu besar');
-            document.location.href='barang.php';
         </script>";
         }
     } else {
    echo "
     <script>
         alert('Gambar belum dipilih');
-        document.location.href='barang.php';
     </script>";
 }
 }
@@ -135,11 +133,11 @@ if (isset($_POST["Simpan"])) {
     </tr>
     <tr>
       <th scope="row">Harga Barang</th>
-      <td><input type="text" name="harga" placholder="Masukan Harga Barang" class="form-control" required></td>
+      <td><input type="number" name="harga" placholder="Masukan Harga Barang" class="form-control" required></td>
     </tr>
     <tr>
       <th scope="row">Stok Barang</th>
-      <td><input type="text" name="stok" placholder="Masukan Stok Barang" class="form-control" required></td>
+      <td><input type="number" name="stok" placholder="Masukan Stok Barang" class="form-control" required></td>
     </tr>
     <tr>
       <th scope="row">Deskripsi Barang</th>
@@ -157,12 +155,7 @@ if (isset($_POST["Simpan"])) {
 </form>
 
 
-<?php
-$no = 1;
-$barang = barang();
-while($data = $barang->fetch(PDO::FETCH_ASSOC)){
 
-?>
 
 <table class="table">
   <thead class="thead-light">
@@ -171,27 +164,38 @@ while($data = $barang->fetch(PDO::FETCH_ASSOC)){
       <th scope="col">Gambar</th>
       <th class="w-25" scope="col">Nama</th>
       <th class="w-25" scope="col">Deskripsi</th>
+      <th scope="col">Stok</th>
       <th scope="col">Harga</th>
       <th scope="col">Aksi</th>
     </tr>
   </thead>
   <tbody>
+  
+  <?php
+$no = 1;
+$barang = barang();
+while($data = $barang->fetch(PDO::FETCH_ASSOC)){
+
+?>
   <tr>  
         <td><? echo $no++; ?></td>
         <td><img src="../gambar/<? echo $data['gambar']; ?>" width="150px" height="150px"></td>
         <td><? echo $data['nama_barang']; ?></td>
         <td><? echo $data['deskripsi']; ?></td>
+        <td><? echo $data['qty']; ?></td>
         <td><? echo $data['harga_barang']; ?></td>
-        <td><a href='edit.php?barang=<? echo $data['nama_barang']; ?>'><i class='fas fa-edit' style='color: green;'></i>
+        <td><a href='editbarang.php?barang=<? echo $data['nama_barang']; ?>'><i class='fas fa-edit' style='color: green;'></i>
                 </a>&nbsp<a href='hapus.php?barang=<? echo $data['nama_barang']; ?>'><i class='far fa-times-circle' style='color: red;'></i>
                 </a></td>
   </tr>
-  </tbody>
-</table>
 
 <?php
 }
 ?>
+  </tbody>
+</table>
+
+
 
 </div>
 

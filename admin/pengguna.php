@@ -103,12 +103,10 @@ if (!isset($_SESSION['admin'])) {
 </head>
 
 <body>
-    <?php
+<?php
     require 'navbar.php';
-    $pengguna = daftPengguna();
-    $no = 1;
-    while ($row = $pengguna->fetch(PDO::FETCH_ASSOC)) {
     ?>
+    
 
         <div class="container mt-5">
             <table class="table">
@@ -118,25 +116,28 @@ if (!isset($_SESSION['admin'])) {
                         <th scope="col">Username</th>
                         <th scope="col">E-mail</th>
                         <th scope="col">Telephone</th>
-                        <th scope="col" colspan="2">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
+                <?php
+    
+    $pengguna = daftPengguna();
+    $no = 1;
+    while ($row = $pengguna->fetch(PDO::FETCH_ASSOC)) {
+    ?>
                     <tr>
                         <td><?php echo $no++; ?></td>
                         <td><?php echo $row['username']; ?></td>
                         <td><?php echo $row['email']; ?></td>
                         <td><?php echo $row['telepon']; ?></td>
-                        <td><a href='editbarang.php?pengguna=<?php echo $row['username']; ?>'><i class='fas fa-edit' style='color: green;'></i>
-                            </a>&nbsp<a href='hapus.php?pengguna=<?php echo $row['username']; ?>'><i class='far fa-times-circle' style='color: red;'></i>
-                            </a></td>
                     </tr>
+        <?php
+        }
+        ?>
                 </tbody>
             </table>
 
-        <?php
-    }
-        ?>
+        
 
         <!-- Javascript -->
         <script type="text/javascript" src="../mdbootstrap/js/jquery.min.js"></script>
