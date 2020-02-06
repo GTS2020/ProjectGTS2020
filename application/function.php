@@ -177,3 +177,81 @@ function edPengguna()
     $stmt = $db->query($sql);
     return $stmt;
 }
+
+
+function selectEdBarang(){
+    global $db;
+    $bar = $_GET['barang'];
+    $sql = "select * from barang where nama_barang='$bar'";
+    $stmt = $db->query($sql);
+    
+    return $stmt;
+}
+
+function edBarang(){
+    global $db;
+    $nm_bar = $_POST['nama'];
+    $harga = $_POST['harga'];
+    $stok = $_POST['stok'];
+    $desk = $_POST['deskripsi'];
+    $WHEREid = $_GET['barang'];
+
+    $ekstensi_diperbolehkan    = array('png', 'jpg', 'jpeg');
+    $gambar = $_FILES['gambar']['name'];
+    $x = explode('.', $gambar);
+    $ekstensi = strtolower(end($x));
+    $ukuran    = $_FILES['gambar']['size'];
+    $file_tmp = $_FILES['gambar']['tmp_name'];
+
+    $sql = "SELECT * FROM barang WHERE nama_barang='$WHEREid'";
+    $row = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+    $oldgambar = $row['gambar'];
+
+    if($_FILES['gambar']['error'] == 4){
+        $gambar = $row['gambar'];
+    } else {
+        if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
+            if ($ukuran < 1044070) {
+            move_uploaded_file($file_tmp, '../gambar/' . $gambar);
+            } else {
+            echo "
+            <script>
+                alert('Gambar terlalu besar');
+            </script>";
+            }
+    }
+    }
+
+    echo "<script>
+                alert('Edit Data Berhasil');
+                document.location.href='barang.php';
+          </script>";
+
+
+
+    $sql2 = "UPDATE barang SET nama_barang='$nm_bar',harga_barang='$harga',qty=$stok,deskripsi='$desk',gambar='$gambar' where nama_barang='$WHEREid'";
+    $stmt = $db->query($sql2);
+    return $db->query($sql2)->rowCount();
+
+}
+
+
+function hapusBarang(){
+    global $db;
+    $id = $_GET['barang'];
+
+    $sql = "SELECT * FROM barang WHERE nama_barang='$id'";
+    $stmt = $db->query($sql);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $gambar = $row['gambar'];
+
+    echo $id;
+
+    $sql2 = "DELETE FROM barang WHERE nama_barang='$id'";
+    $db->query($sql2);
+    unlink('../gambar/'.$gambar);
+    echo "<script>
+            alert('Data Berhasil Dihapus');
+            document.location.href='barang.php';
+            </script>";
+}

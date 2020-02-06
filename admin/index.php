@@ -4,6 +4,10 @@ require '../application/config.php';
 require '../application/function.php';
 
 
+if (isset($_SESSION['admin'])) {
+    header("Location: dashboard.php");
+}
+
 if (isset($_POST['Login'])) {
     loginadmin($_POST);
 }
