@@ -62,7 +62,7 @@ if (isset($_POST['cari'])) {
           $stmt = $db->query($sql);
           $hasil = $stmt->fetch(PDO::FETCH_ASSOC);
         } else {
-          $hasil['keranjang'] = 3;
+          $hasil['keranjang'] = 0;
         }
         ?>
         <li class="nav-item pt-1 pr-2" id="ex3">
