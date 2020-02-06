@@ -103,41 +103,41 @@ if (!isset($_SESSION['admin'])) {
 </head>
 
 <body>
-<?php
+    <?php
     require 'navbar.php';
     ?>
-    
 
-        <div class="container mt-5">
-            <table class="table">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">E-mail</th>
-                        <th scope="col">Telephone</th>
-                    </tr>
-                </thead>
-                <tbody>
+
+    <div class="container mt-5">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Telephone</th>
+                </tr>
+            </thead>
+            <tbody>
                 <?php
-    
-    $pengguna = daftPengguna();
-    $no = 1;
-    while ($row = $pengguna->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+
+                $pengguna = daftPengguna();
+                $no = 1;
+                while ($row = $pengguna->fetch(PDO::FETCH_ASSOC)) {
+                ?>
                     <tr>
                         <td><?php echo $no++; ?></td>
                         <td><?php echo $row['username']; ?></td>
                         <td><?php echo $row['email']; ?></td>
                         <td><?php echo $row['telepon']; ?></td>
                     </tr>
-        <?php
-        }
-        ?>
-                </tbody>
-            </table>
+                <?php
+                }
+                ?>
+            </tbody>
+        </table>
 
-        
+
 
         <!-- Javascript -->
         <script type="text/javascript" src="../mdbootstrap/js/jquery.min.js"></script>

@@ -103,38 +103,38 @@ if (!isset($_SESSION['admin'])) {
 </head>
 
 <body>
-<?php
+    <?php
     require 'navbar.php';
     ?>
 
-<div class="container mt-5">
-  <h2>Data Barang</h2>
-  <form method="post" enctype="multipart/form-data">
-  <table class="table w-50">
-    <tbody>
-      <tr>
-        <th scope="row">Username</th>
-        <td><input type="text" name="nama" value="<?= $row['nama_barang'] ?>" class="form-control" required></td>
-      </tr>
-      <tr>
-        <th scope="row">E-mail</th>
-        <td><input type="number" name="harga" value="<?= $row['harga_barang'] ?>" class="form-control" required></td>
-      </tr>
-      <tr>
-        <th scope="row">Telephone</th>
-        <td><input type="number" name="stok" value="<?= $row['qty'] ?>" class="form-control" required></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td><input type="submit" class="btn btn-sm light-blue darken-3" style="color:white;" value="Simpan" name="Simpan"></td>
-      </tr>
-  </tbody>
-  </form>
+    <div class="container mt-5">
+        <h2>Data Barang</h2>
+        <form method="post" enctype="multipart/form-data">
+            <table class="table w-50">
+                <tbody>
+                    <tr>
+                        <th scope="row">Username</th>
+                        <td><input type="text" name="nama" value="<?= $row['nama_barang'] ?>" class="form-control" required></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">E-mail</th>
+                        <td><input type="number" name="harga" value="<?= $row['harga_barang'] ?>" class="form-control" required></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Telephone</th>
+                        <td><input type="number" name="stok" value="<?= $row['qty'] ?>" class="form-control" required></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" class="btn btn-sm light-blue darken-3" style="color:white;" value="Simpan" name="Simpan"></td>
+                    </tr>
+                </tbody>
+        </form>
 
 
 
-    <!-- Javascript -->
-    <script type="text/javascript" src="../mdbootstrap/js/jquery.min.js"></script>
+        <!-- Javascript -->
+        <script type="text/javascript" src="../mdbootstrap/js/jquery.min.js"></script>
         <!-- Bootstrap tooltips -->
         <script type="text/javascript" src="../mdbootstrap/js/popper.min.js"></script>
         <!-- Bootstrap core JavaScript -->
